@@ -24,14 +24,13 @@ module.exports = {
     },
     plugins: [
         new CopyWebpackPlugin([{
-            from: 'build/assets',
-            to: 'assets'
+            from: 'src/images',
+            to: 'images'
         }]),
         new HTMLWebpackPlugin({
-            template: 'build/index.html',
-            filename: 'index.html',
+            title: "Slots",
             hash: true,
-            minify: false
+            minify: true
         })
     ]
 }

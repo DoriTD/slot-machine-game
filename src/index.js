@@ -21,7 +21,7 @@ app.renderer.view.style.position = "absolute";
 app.renderer.view.style.display = "block";
 
 for (let i = 1; i <= 12; i++) {
-  loader.add(`./assets/${i}.png`);
+  loader.add(`./images/${i}.png`);
 }
 loader.load(setup);
 

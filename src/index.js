@@ -1,42 +1,39 @@
-// Import Application class that is the main part of our PIXI project
-import { Application } from '@pixi/app'
+import * as PIXI from "pixi.js";
+import Reel from "./reel";
+//Aliases
+let Application = PIXI.Application,
+  Container = PIXI.Container,
+  loader = PIXI.loader,
+  resources = PIXI.loader.resources,
+  TextureCache = PIXI.utils.TextureCache,
+  Sprite = PIXI.Sprite;
 
-// In order that PIXI could render things we need to register appropriate plugins
-import { Renderer } from '@pixi/core' // Renderer is the class that is going to register plugins
+//Create a Pixi Application
+let app = new Application({
+  antialiasing: true,
+  transparent: false,
+  resolution: 1
+});
 
-import { BatchRenderer } from '@pixi/core' // BatchRenderer is the "plugin" for drawing sprites
-Renderer.registerPlugin('batch', BatchRenderer)
+//Add the canvas to the HTML document
+document.body.appendChild(app.view);
+app.renderer.view.style.position = "absolute";
+app.renderer.view.style.display = "block";
 
-import { TickerPlugin } from '@pixi/ticker' // TickerPlugin is the plugin for running an update loop (it's for the application class)
-Application.registerPlugin(TickerPlugin)
+for (let i = 1; i <= 12; i++) {
+  loader.add(`./assets/${i}.png`);
+}
+loader.load(setup);
 
-// And just for convenience let's register Loader plugin in order to use it right from Application instance like app.loader.add(..) etc.
-import { AppLoaderPlugin } from '@pixi/loaders'
-Application.registerPlugin(AppLoaderPlugin)
+function setup() {
+ 
+  const reel = new Reel(app);
+  console.log(reel.initialPosition)
 
-// Sprite is our image on the stage
-import { Sprite } from '@pixi/sprite'
+  //app.stage.addChild(images[3]);
 
-// App with width and height of the page
-const app = new Application({
-	width: window.innerWidth,
-	height: window.innerHeight
-})
-document.body.appendChild(app.view) // Create Canvas tag in the body
-
-// Load the logo
-app.loader.add('logo', './assets/logo.png')
-app.loader.load(() => {
-	const sprite = Sprite.from('logo')
-	sprite.anchor.set(0.5) // We want to rotate our sprite relative to the center, so 0.5
-	app.stage.addChild(sprite)
-
-	// Position the sprite at the center of the stage
-	sprite.x = app.screen.width * 0.5
-	sprite.y = app.screen.height * 0.5
-
-	// Put the rotating function into the update loop
-	app.ticker.add(delta => {
-		sprite.rotation += 0.02 * delta
-	})
-})
+  // Listen for frame updates
+  app.ticker.add(() => {
+    //bunny.rotation += 0.01;
+  });
+}

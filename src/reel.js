@@ -4,7 +4,7 @@ export default class Reel {
     this.images = [];
     for (let i = 1; i <= 12; i++) {
       let img = new PIXI.Sprite(
-        PIXI.loader.resources[`./assets/${i}.png`].texture
+        PIXI.loader.resources[`./images/${i}.png`].texture
       );
       this.images.push(img);
     }

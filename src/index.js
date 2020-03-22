@@ -28,7 +28,7 @@ loader.load(setup);
 function setup() {
  
   const reel = new Reel(app);
-  console.log(reel.initialPosition)
+  // console.log(reel.initialPosition)
 
   //app.stage.addChild(images[3]);
 

@@ -1,5 +1,6 @@
 import * as PIXI from "pixi.js";
 import Reel from "./reel";
+import Game from "./game";
 //Aliases
 let Application = PIXI.Application,
   Container = PIXI.Container,
@@ -26,14 +27,15 @@ for (let i = 1; i <= 12; i++) {
 loader.load(setup);
 
 function setup() {
- 
-  const reel = new Reel(app);
+  const game = new Game();
+
+  //const reel = new Reel(app);
   // console.log(reel.initialPosition)
 
   //app.stage.addChild(images[3]);
 
   // Listen for frame updates
-  app.ticker.add(() => {
-    //bunny.rotation += 0.01;
+  app.ticker.add(timeDiff => {
+    game.render(timeDiff);
   });
 }
